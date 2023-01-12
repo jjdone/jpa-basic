@@ -1,7 +1,7 @@
 package jpabook.jpashop;
 
-import jpabook.jpashop.domain.Member;
-import jpabook.jpashop.domain.Team;
+import jpabook.jpashop.domain.Order;
+import jpabook.jpashop.domain.OrderItem;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -17,21 +17,10 @@ public class JpaMain {
         tx.begin();
 
         try {
-            Team team = new Team();
-            team.setName("TeamA");
-            em.persist(team);
+            Order order = new Order();
+//            order.addOrderItem(new OrderItem());
 
-            Member member = new Member();
-            member.setUsername("member1");
-            member.setTeam(team);
-            em.persist(member);
 
-            Member findMember = em.find(Member.class, member.getId());
-
-            Team findTeam = member.getTeam();
-            System.out.println("findTeam = " + findTeam.getName());
-
-            
 
             tx.commit();
         } catch (Exception e) {
