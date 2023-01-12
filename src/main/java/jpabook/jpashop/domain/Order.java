@@ -6,16 +6,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "ORDERS")
 public class Order {
 
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     @Column(name = "ORDER_ID")
     private Long id;
 
     @ManyToOne
     @JoinColumn(name = "MEMBER_ID")
     private Member member;
+
+    @OneToOne
+    @JoinColumn(name = "DELIVERY_ID")
+    private Delivery delivery;
 
     private LocalDateTime orderDate;
 
@@ -26,9 +30,12 @@ public class Order {
     private List<OrderItem> orderItems = new ArrayList<>();
 
 
-    public void addOrderItem(OrderItem orderItem) {
-        orderItems.add(orderItem);
-        orderItem.setOrder(this);
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Member getMember() {
@@ -39,12 +46,12 @@ public class Order {
         this.member = member;
     }
 
-    public Long getId() {
-        return id;
+    public Delivery getDelivery() {
+        return delivery;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setDelivery(Delivery delivery) {
+        this.delivery = delivery;
     }
 
     public LocalDateTime getOrderDate() {
@@ -61,5 +68,13 @@ public class Order {
 
     public void setStatus(OrderStatus status) {
         this.status = status;
+    }
+
+    public List<OrderItem> getOrderItems() {
+        return orderItems;
+    }
+
+    public void setOrderItems(List<OrderItem> orderItems) {
+        this.orderItems = orderItems;
     }
 }
