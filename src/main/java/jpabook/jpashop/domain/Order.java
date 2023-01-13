@@ -29,7 +29,6 @@ public class Order {
     @OneToMany(mappedBy = "order")
     private List<OrderItem> orderItems = new ArrayList<>();
 
-
     public Long getId() {
         return id;
     }
